@@ -8,6 +8,7 @@ const zomato_search_url = 'https://developers.zomato.com/api/v2.1/search';
 const zomato_apiKey = '330aeb91e96aa95799c484c0ee8f081c';
 let global_lat = '';
 let global_lon = '';
+let images = ['images/image1.jpg', 'images/image2.jpg', 'images/image3.jpg', 'images/image4.jpg', 'images/image5.jpg'];
 
 
 function displayCollections(data, cityTitle , entityId){
@@ -34,7 +35,7 @@ function displaySelectedCollection(data, collectionName){
     let htmldata = "";
     data.restaurants.forEach( restaurants => {
         htmldata += `<div class="card">
-        <img src="${restaurants.restaurant.featured_image}" alt="restaurant" style="width:100%">
+        <img src="${restaurants.restaurant.featured_image === "" ? images[Math.floor(Math.random() * images.length)]: restaurants.restaurant.featured_image}" alt="restaurant" style="width:100%">
         <div class="container">
           <h4><b>${restaurants.restaurant.name}</b></h4>
           <p>${restaurants.restaurant.location.address}</p>
