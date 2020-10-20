@@ -38,6 +38,8 @@ function displaySelectedCollection(data, collectionName){
         <img src="${restaurants.restaurant.featured_image === "" ? images[Math.floor(Math.random() * images.length)]: restaurants.restaurant.featured_image}" alt="restaurant" style="width:100%">
         <div class="container">
           <h4><b>${restaurants.restaurant.name}</b></h4>
+          <p>User rating - ${restaurants.restaurant.user_rating.rating_text}</p>
+          <p>${restaurants.restaurant.phone_numbers}</p>
           <p>${restaurants.restaurant.location.address}</p>
         </div>
       </div>`;
@@ -66,6 +68,7 @@ function getZomatoCollectionData(entityID, collectionId, collectionName){
     fetch(url, options)
     .then(response => response.json())
     .then(responseJson => displaySelectedCollection(responseJson, collectionName))
+    .catch(err => alert(err.message));
 }
 
 function GetZomatoCityData(data, encodedSearchLocation){
@@ -91,6 +94,7 @@ function GetZomatoCityData(data, encodedSearchLocation){
     .then(responseJson => GetZomatoCollectionData(responseJson.location_suggestions[0].city_id
         , responseJson.location_suggestions[0].title
         , responseJson.location_suggestions[0].entity_id))
+    .catch(err => alert(err.message));
 }
 
 function GetZomatoCollectionData(cityId, cityTitle, entityId){
@@ -110,7 +114,9 @@ function GetZomatoCollectionData(cityId, cityTitle, entityId){
     fetch(url, options)
     .then(response => response.json())
     .then(responseJson => displayCollections(responseJson, cityTitle, entityId))
-
+    .catch(err => {
+        alert(err.message);
+    });
 }
 
 function getTomtomLatLon(location){
