@@ -8,6 +8,7 @@ const zomato_search_url = 'https://developers.zomato.com/api/v2.1/search';
 const zomato_apiKey = '330aeb91e96aa95799c484c0ee8f081c';
 let global_lat = '';
 let global_lon = '';
+let global_collectionId = 0;
 let images = ['images/image1.jpg', 'images/image2.jpg', 'images/image3.jpg', 'images/image4.jpg', 'images/image5.jpg'];
 
 
@@ -35,9 +36,13 @@ function displaySelectedCollection(data, collectionName){
     let htmldata = "";
     data.restaurants.forEach( restaurants => {
         htmldata += `<div class="card">
+        <a id="back-to-collection" href="#" 
+        data-back-collectionid="${global_collectionId}" 
+        data-back-entityid="${restaurants.restaurant.location.city_id}" 
+        data-back-searchTitle="${restaurants.restaurant.location.city}"> Back to search results</a>
         <img src="${restaurants.restaurant.featured_image === "" ? images[Math.floor(Math.random() * images.length)]: restaurants.restaurant.featured_image}" alt="restaurant" style="width:100%">
         <div class="container">
-          <h4><b>${restaurants.restaurant.name}</b></h4>
+          <h4><a href="${restaurants.restaurant.url}" target="_blank"><b>${restaurants.restaurant.name}</b></a></h4>
           <p>User rating - ${restaurants.restaurant.user_rating.rating_text}</p>
           <p>${restaurants.restaurant.phone_numbers}</p>
           <p>${restaurants.restaurant.location.address}</p>
@@ -56,6 +61,8 @@ function getZomatoCollectionData(entityID, collectionId, collectionName){
         lon: global_lon,
         collection_id: collectionId
     };
+
+    global_collectionId = collectionId;
 
     const queryString = formatQueryParams(params);
     const url = `${zomato_search_url}?${queryString}`
@@ -146,6 +153,18 @@ function formatQueryParams(params) {
     return queryItems.join('&');
 }
 
+function BacktoCollectionslinkClicked(){
+    $('#results').on('click', '#back-to-collection', function(event) {
+        event.preventDefault();
+        $('.card').remove();
+        let entityid = $(this).attr('data-back-entityid');
+        let collectionid = $(this).attr('data-back-collectionid');
+        let collectionName = $(this).attr('data-back-searchTitle');
+        GetZomatoCollectionData(entityid, collectionName, collectionid);
+        
+    });
+}
+
 function loadCollectionlinksClicked(){
     $('#results').on('click', '.collection-links', function(event) {
         event.preventDefault();
@@ -161,7 +180,16 @@ function searchForLocationClicked(){
     $('form').submit(event => {
         event.preventDefault();
         $('.card').remove();
+        let numbers = /^[0-9]+$/;
         const searchTerm = $('#js-search-term').val();
+
+        if(numbers.test(searchTerm))
+        {
+            alert('Please enter only valid city and/or city, state');
+            $('#js-search-term').val('');
+            return;
+        }
+            
         getTomtomLatLon(searchTerm);
         $('#js-search-term').val('');
     });
@@ -170,6 +198,7 @@ function searchForLocationClicked(){
 function loadApp(){
     searchForLocationClicked();
     loadCollectionlinksClicked();
+    BacktoCollectionslinkClicked()
 }
 
 $(loadApp);
