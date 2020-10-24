@@ -14,20 +14,25 @@ let images = ['images/image1.jpg', 'images/image2.jpg', 'images/image3.jpg', 'im
 
 function displayCollections(data, cityTitle , entityId){
     let htmldata = "";
+    
     data.collections.forEach( collections => {
-        htmldata += `<div class="card" data-entityid="${entityId}" 
-        data-collectionid="${collections.collection.collection_id}" 
-        data-collectionName="${collections.collection.title}">
-        <img src="${collections.collection.image_url}" alt="Avatar" style="width:100%">
-        <div class="container">
-          <h4><a class="collection-links" href="${collections.collection.share_url}"><b>${collections.collection.title}</b></a></h4>
-          <p>${collections.collection.description}</p>
-        </div>
-      </div>`;
+        htmldata += `
+        <li class="cards__item">
+            <div class="card" data-entityid="${entityId}" 
+            data-collectionid="${collections.collection.collection_id}" 
+            data-collectionName="${collections.collection.title}">
+                <img src="${collections.collection.image_url}" alt="Avatar" class="card__image">
+                <div class="card__content">
+                <div class="card__title"><a class="collection-links" href="${collections.collection.share_url}"><b>${collections.collection.title}</b></a></div>
+                    <p class="card__text">${collections.collection.description}</p>
+                </div>
+            </div>
+        </li>
+        `;
 
     });
     $('#search-term').text(`Search results for -  ${cityTitle}`);
-    $('#results').append(htmldata);
+    $('#results-out').append(htmldata);
     $('#results').removeClass('hidden');
 
 }
@@ -35,23 +40,29 @@ function displayCollections(data, cityTitle , entityId){
 function displaySelectedCollection(data, collectionName){
     let htmldata = "";
     data.restaurants.forEach( restaurants => {
-        htmldata += `<div class="card">
-        <a id="back-to-collection" href="#" 
-        data-back-collectionid="${global_collectionId}" 
-        data-back-entityid="${restaurants.restaurant.location.city_id}" 
-        data-back-searchTitle="${restaurants.restaurant.location.city}"> Back to search results</a>
-        <img src="${restaurants.restaurant.featured_image === "" ? images[Math.floor(Math.random() * images.length)]: restaurants.restaurant.featured_image}" alt="restaurant" style="width:100%">
-        <div class="container">
-          <h4><a href="${restaurants.restaurant.url}" target="_blank"><b>${restaurants.restaurant.name}</b></a></h4>
-          <p>User rating - ${restaurants.restaurant.user_rating.rating_text}</p>
-          <p>${restaurants.restaurant.phone_numbers}</p>
-          <p>${restaurants.restaurant.location.address}</p>
-        </div>
-      </div>`;
+        htmldata += `
+        <li class="cards__item">
+            <div class="card">
+                <a id="back-to-collection" href="#" 
+                data-back-collectionid="${global_collectionId}" 
+                data-back-entityid="${restaurants.restaurant.location.city_id}" 
+                data-back-searchTitle="${restaurants.restaurant.location.city}"> Back to search results</a>
+                <img src="${restaurants.restaurant.featured_image === "" ? images[Math.floor(Math.random() * images.length)]: restaurants.restaurant.featured_image}" alt="restaurant" class="card__image">
+                <div class="card__content">
+                    <div class="card__title"><a href="${restaurants.restaurant.url}" target="_blank"><b>${restaurants.restaurant.name}</b></a></div>
+                    <p class="card__text">
+                        User rating - ${restaurants.restaurant.user_rating.rating_text} <br>
+                        ${restaurants.restaurant.phone_numbers} <br>
+                        ${restaurants.restaurant.location.address}
+                    </p>
+                </div>
+            </div>  
+        </li>
+      `;
 
     });
     $('#search-term').text(collectionName);
-    $('#results').append(htmldata);
+    $('#results-out').append(htmldata);
 }
 
 function getZomatoCollectionData(entityID, collectionId, collectionName){
@@ -156,7 +167,7 @@ function formatQueryParams(params) {
 function BacktoCollectionslinkClicked(){
     $('#results').on('click', '#back-to-collection', function(event) {
         event.preventDefault();
-        $('.card').remove();
+        $('.cards').html('');
         let entityid = $(this).attr('data-back-entityid');
         let collectionid = $(this).attr('data-back-collectionid');
         let collectionName = $(this).attr('data-back-searchTitle');
@@ -168,7 +179,7 @@ function BacktoCollectionslinkClicked(){
 function loadCollectionlinksClicked(){
     $('#results').on('click', '.collection-links', function(event) {
         event.preventDefault();
-        $('.card').remove();
+        $('.cards').html('');
         let entityid = $(this).closest('.card').attr('data-entityid');
         let collectionid = $(this).closest('.card').attr('data-collectionid');
         let collectionName = $(this).closest('.card').attr('data-collectionName');
@@ -179,7 +190,7 @@ function loadCollectionlinksClicked(){
 function searchForLocationClicked(){
     $('form').submit(event => {
         event.preventDefault();
-        $('.card').remove();
+        $('.cards').html('');
         let numbers = /^[0-9]+$/;
         const searchTerm = $('#js-search-term').val();
 

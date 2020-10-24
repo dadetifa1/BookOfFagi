@@ -11,20 +11,25 @@
         
     </header>
     <main>
-        <div class="container">
-            <h1>Find your next adventure</h1>
-    
+        <div class="item centerlize">
+            <h1>Discover what the city has to offer</h1>
+
             <form id="js-form">
-                <label for="js-search-term">Desired location</label>
+                <!-- <label for="js-search-term">Desired location</label> -->
                 <input type="text" name="search-term" id="js-search-term" placeholder="City, State" required>
                 <input type="submit" value="Go!">
             </form>
-    
-            <p id="js-error-message" class="error-message"></p>
-            <section id="results" class="hidden">
-              <h2><span id="search-term"></span></h2>
-              </ul>
-            </section>
+        </div>  
+        <div class="container">
+            <div class="testing">
+                <p id="js-error-message" class="error-message"></p>
+                <section id="results" class="hidden">
+                    <h2><span id="search-term"></span></h2>
+                    <ul class="cards" id="results-out"></ul>
+                    </ul>
+                </section>
+            </div> 
+            
         </div>
     </main>
     <footer></footer>
