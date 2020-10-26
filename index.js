@@ -17,19 +17,15 @@ function displayCollections(data, cityTitle , entityId){
     
     data.collections.forEach( collections => {
         htmldata += `
-        <li class="cards__item">
-            <div class="card" data-entityid="${entityId}" 
+        <div class="card" data-entityid="${entityId}" 
             data-collectionid="${collections.collection.collection_id}" 
             data-collectionName="${collections.collection.title}">
-                <div class="card__image">
-                    <img src="${collections.collection.image_url}" alt="Avatar">
-                </div>
-                <div class="card__content">
-                <div class="card__title"><a class="collection-links" href="${collections.collection.share_url}"><b>${collections.collection.title}</b></a></div>
-                    <p class="card__text">${collections.collection.description}</p>
-                </div>
+            <img src="${collections.collection.image_url}" alt="Avatar">
+            <div class="card__content">
+            <div class="card__title"><a class="collection-links" href="${collections.collection.share_url}"><b>${collections.collection.title}</b></a></div>
+                <p class="card__text">${collections.collection.description}</p>
             </div>
-        </li>
+        </div>
         `;
 
     });
@@ -41,31 +37,32 @@ function displayCollections(data, cityTitle , entityId){
 
 function displaySelectedCollection(data, collectionName){
     let htmldata = "";
+    let returnData = "";
     data.restaurants.forEach( restaurants => {
+        returnData = `
+        <a id="back-to-collection" href="#" 
+        data-back-collectionid="${global_collectionId}" 
+        data-back-entityid="${restaurants.restaurant.location.city_id}" 
+        data-back-searchTitle="${restaurants.restaurant.location.city}"> Back to search results</a>
+        `;
         htmldata += `
-        <li class="cards__item">
-            <div class="card">
-                <a id="back-to-collection" href="#" 
-                data-back-collectionid="${global_collectionId}" 
-                data-back-entityid="${restaurants.restaurant.location.city_id}" 
-                data-back-searchTitle="${restaurants.restaurant.location.city}"> Back to search results</a>
-                <div class="card__image">
-                    <img src="${restaurants.restaurant.featured_image === "" ? images[Math.floor(Math.random() * images.length)]: restaurants.restaurant.featured_image}" alt="restaurant">
-                </div>    
-                <div class="card__content">
-                    <div class="card__title"><a href="${restaurants.restaurant.url}" target="_blank"><b>${restaurants.restaurant.name}</b></a></div>
-                    <p class="card__text">
-                        User rating - ${restaurants.restaurant.user_rating.rating_text} <br>
-                        ${restaurants.restaurant.phone_numbers} <br>
-                        ${restaurants.restaurant.location.address}
-                    </p>
-                </div>
-            </div>  
-        </li>
+        <div class="card">
+            
+            <img src="${restaurants.restaurant.featured_image === "" ? images[Math.floor(Math.random() * images.length)]: restaurants.restaurant.featured_image}" alt="restaurant">
+            <div class="card__content">
+                <div class="card__title"><a href="${restaurants.restaurant.url}" target="_blank"><b>${restaurants.restaurant.name}</b></a></div>
+                <p class="card__text">
+                    User rating - ${restaurants.restaurant.user_rating.rating_text} <br>
+                    ${restaurants.restaurant.phone_numbers} <br>
+                    ${restaurants.restaurant.location.address}
+                </p>
+            </div>
+        </div>  
       `;
 
     });
-    $('#search-term').text(collectionName);
+    $('#search-term').text(`${collectionName} -  `);
+    $('#search-term').append(returnData);
     $('#results-out').append(htmldata);
 }
 

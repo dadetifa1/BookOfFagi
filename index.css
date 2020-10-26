@@ -1,12 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
 *{
   box-sizing: border-box;
 }
 
+
+html {
+  background-color: #f0f0f0;
+  margin-top: 0;
+}
+
+body {
+  color: #999999;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  letter-spacing: 0;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+}
+
 h1 {
-  margin-top: 40%;
-  color:  rgb(79, 87, 80);
+  margin-top: 15%;
+  color: white;
   margin-bottom: 5px;
-  font-size: 1.6rem;
+  font-family: 'Dancing Script', cursive;
+}
+
+#js-search-term {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+input[type=submit]{
+  padding: 10px 20px;
+  background-color: gray;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
 #search-term{
@@ -23,13 +56,13 @@ h2{
 
 .centered {
   margin: 0 auto;
+  width: 80%;
   padding: 0 1em;
 }
 
 .centerlize {
   width: 100%;
   height: 60vh;
-  background-color: blue; 
   color: white;
   padding: 1px;
   text-align: center;
@@ -37,34 +70,18 @@ h2{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  filter: grayscale(70%);
   /* background-image: url('https://b.zmtcdn.com/web_assets/81f3ff974d82520780078ba1cfbd453a1583259680.png'); */
-  /* background-image: url('https://www.discoverlosangeles.com/sites/default/files/styles/hero/public/images/2019-09/Vegetable%20Restaurant%20Studio%20City%20dishes.jpg?itok=87yWdt54'); */
-  background-image: url('https://www.vmcdn.ca/f/files/via/images/nightingale-at-home-dishes.jpg;w=960');
+  background-image: url('https://www.discoverlosangeles.com/sites/default/files/styles/hero/public/images/2019-09/Vegetable%20Restaurant%20Studio%20City%20dishes.jpg?itok=87yWdt54');
+  /* background-image: url('https://www.vmcdn.ca/f/files/via/images/nightingale-at-home-dishes.jpg;w=960'); */
   /* background-image: url('https://srushtiimx.com/wp-content/uploads/2017/12/Online-Socializing-The-beginning.jpg'); */
 }
 
-
-html {
-  background-color: #f0f0f0;
-  margin-top: 0;
-}
-
-body {
-  color: #999999;
-  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0;
-  margin: 0;
-  /* padding: 1rem; */
-  text-rendering: optimizeLegibility;
-}
 
 .card {
   background-color: white;
   border-radius: 0.25rem;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-  display: -webkit-box;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -78,9 +95,10 @@ body {
 }
 
 img {
-	border: 0;
-	width: 100%;
-  height: auto;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 200px;
   object-fit: cover;
 }
 
@@ -98,7 +116,6 @@ img {
   overflow: hidden;
   position: relative;
   flex: 3;
-  transition: -webkit-filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
   transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
   transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
 }
@@ -119,26 +136,18 @@ img {
 }
 
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  justify-content: space-between;
-}
-
-.cards__item {
-  flex: 1 0 500px;
-  box-sizing: border-box;
-  margin: 1rem .25em;
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+  justify-content: space-around ;
 }
 
 
 @media (min-width: 40em) {
-  .cards__item {
-    flex: 0 1 calc(50% - .5em);
+  .cards {
+    grid-template-columns: auto auto;
   }
   h1 {
-    margin-top: 12%;
-    color:  rgb(79, 87, 80);
     font-size: 5rem;
     margin-bottom: 5px;
   }
@@ -146,13 +155,11 @@ img {
 
 
 @media (min-width: 60em) {
-  .cards__item {
-    flex: 0 1 calc(25% - 1em);
+  .cards {
+    grid-template-columns: auto auto auto auto;
     margin-bottom: 2em;
   }
   h1 {
-    margin-top: 12%;
-    color:  rgb(79, 87, 80);
     font-size: 5rem;
     margin-bottom: 5px;
   }
