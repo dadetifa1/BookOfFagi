@@ -11,3 +11,7 @@ HTML - CSS - JavaScript - jQuery
 Landing Page:
 
 ![Landing Page](screenshots/Start.jpg)
+
+Sample results:
+
+![sample results](screenshots/Search.jpg)
