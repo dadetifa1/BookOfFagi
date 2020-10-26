@@ -21,7 +21,9 @@ function displayCollections(data, cityTitle , entityId){
             <div class="card" data-entityid="${entityId}" 
             data-collectionid="${collections.collection.collection_id}" 
             data-collectionName="${collections.collection.title}">
-                <img src="${collections.collection.image_url}" alt="Avatar" class="card__image">
+                <div class="card__image">
+                    <img src="${collections.collection.image_url}" alt="Avatar">
+                </div>
                 <div class="card__content">
                 <div class="card__title"><a class="collection-links" href="${collections.collection.share_url}"><b>${collections.collection.title}</b></a></div>
                     <p class="card__text">${collections.collection.description}</p>
@@ -47,7 +49,9 @@ function displaySelectedCollection(data, collectionName){
                 data-back-collectionid="${global_collectionId}" 
                 data-back-entityid="${restaurants.restaurant.location.city_id}" 
                 data-back-searchTitle="${restaurants.restaurant.location.city}"> Back to search results</a>
-                <img src="${restaurants.restaurant.featured_image === "" ? images[Math.floor(Math.random() * images.length)]: restaurants.restaurant.featured_image}" alt="restaurant" class="card__image">
+                <div class="card__image">
+                    <img src="${restaurants.restaurant.featured_image === "" ? images[Math.floor(Math.random() * images.length)]: restaurants.restaurant.featured_image}" alt="restaurant">
+                </div>    
                 <div class="card__content">
                     <div class="card__title"><a href="${restaurants.restaurant.url}" target="_blank"><b>${restaurants.restaurant.name}</b></a></div>
                     <p class="card__text">

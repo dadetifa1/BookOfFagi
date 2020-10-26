@@ -16,6 +16,11 @@ h2{
   text-align: center;
 }
 
+.centered {
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
 .centerlize {
   width: 100%;
   height: 60vh;
@@ -30,6 +35,7 @@ h2{
   /* background-image: url('https://b.zmtcdn.com/web_assets/81f3ff974d82520780078ba1cfbd453a1583259680.png'); */
   /* background-image: url('https://www.discoverlosangeles.com/sites/default/files/styles/hero/public/images/2019-09/Vegetable%20Restaurant%20Studio%20City%20dishes.jpg?itok=87yWdt54'); */
   background-image: url('https://www.vmcdn.ca/f/files/via/images/nightingale-at-home-dishes.jpg;w=960');
+  /* background-image: url('https://srushtiimx.com/wp-content/uploads/2017/12/Online-Socializing-The-beginning.jpg'); */
 }
 
 
@@ -46,45 +52,7 @@ body {
   /* padding: 1rem; */
   text-rendering: optimizeLegibility;
 }
-img {
-  /* height: auto; */
-  max-width: 100%;
-  vertical-align: middle;
-}
 
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.cards__item {
-  flex: 1;
-  padding: 1rem;
-}
-@media (min-width: 640px) {
-  .cards__item {
-    width: 50%;
-  }
-  h1 {
-    margin-top: 12%;
-    color:  rgb(79, 87, 80);
-    font-size: 5rem;
-    margin-bottom: 5px;
-  }
-}
-@media (min-width: 896px) {
-  .cards__item {
-    width: 30%;
-  }
-  h1 {
-    margin-top: 12%;
-    color:  rgb(79, 87, 80);
-    font-size: 5rem;
-    margin-bottom: 5px;
-  }
-}
 .card {
   background-color: white;
   border-radius: 0.25rem;
@@ -94,16 +62,25 @@ img {
   flex-direction: column;
   overflow: hidden;
 }
-.card:hover .card__image {
-  filter: contrast(100%);
-}
+
 .card__content {
-  display: -webkit-box;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
   padding: 1rem;
 }
+
+img {
+	/* display: block; */
+	border: 0;
+	width: 100%;
+	height: auto;
+}
+
+.card:hover .card__image {
+  filter: contrast(100%);
+}
+
 .card__image {
   background-position: center center;
   background-repeat: no-repeat;
@@ -113,19 +90,10 @@ img {
   filter: contrast(70%);
   overflow: hidden;
   position: relative;
+  flex:0.5656;
   transition: -webkit-filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
   transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
-  transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91), -webkit-filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
-}
-.card__image::before {
-  content: "";
-  display: block;
-  padding-top: 56.25%;
-}
-@media (min-width: 640px) {
-  .card__image::before {
-    padding-top: 6.6%;
-  }
+  transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
 }
 
 .card__title {
@@ -135,10 +103,50 @@ img {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+
 .card__text {
-  -webkit-box-flex: 1;
   flex: 1 1 auto;
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.25rem;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: space-between;
+}
+
+.cards__item {
+  flex: 1 0 500px;
+  box-sizing: border-box;
+  margin: 1rem .25em;
+}
+
+
+@media (min-width: 40em) {
+  .cards__item {
+    flex: 0 1 calc(50% - .5em);
+  }
+  h1 {
+    margin-top: 12%;
+    color:  rgb(79, 87, 80);
+    font-size: 5rem;
+    margin-bottom: 5px;
+  }
+}
+
+
+@media (min-width: 60em) {
+  .cards__item {
+    flex: 0 1 calc(25% - 1em);
+    margin-bottom: 2em;
+  }
+  h1 {
+    margin-top: 12%;
+    color:  rgb(79, 87, 80);
+    font-size: 5rem;
+    margin-bottom: 5px;
+  }
 }
