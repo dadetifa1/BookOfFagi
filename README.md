@@ -1,4 +1,4 @@
-# BookOfFagi
+# Book-Of-Fagi
   as user in a new city (or even your current city) use this to discoover new places, restaurants or events to visit. 
 
 # live link 
