@@ -1,5 +1,5 @@
-# BookOfFagi
-  as user in a new city (or even your current city) use this to discoover new places, restaurants or events to visit. 
+# Book-Of-Fagi
+  as user in a new city (or even your current city) use this to discover new places, restaurants or events to visit. 
 
 # live link 
 [Try it out](https://dadetifa1.github.io/BookOfFagi/) 
@@ -11,3 +11,7 @@ HTML - CSS - JavaScript - jQuery
 Landing Page:
 
 ![Landing Page](screenshots/Start.jpg)
+
+Sample results:
+
+![sample results](screenshots/Search.jpg)
