@@ -15,6 +15,11 @@ let images = ['images/image1.jpg', 'images/image2.jpg', 'images/image3.jpg', 'im
 function displayCollections(data, cityTitle , entityId){
     let htmldata = "";
     
+    if(data.collections.length  === 0){
+        $('#search-term').text(`Sorry no results  for ${cityTitle}.  Have you considered leaving`);
+        return;
+    }
+
     data.collections.forEach( collections => {
         htmldata += `
         <div class="card" data-entityid="${entityId}" 
@@ -38,6 +43,12 @@ function displayCollections(data, cityTitle , entityId){
 function displaySelectedCollection(data, collectionName){
     let htmldata = "";
     let returnData = "";
+
+    if(data.results_found  === 0){
+        $('#search-term').text(`Sorry no results  for ${collectionName}.  Please start with the city search again`);
+        return;
+    }
+
     data.restaurants.forEach( restaurants => {
         returnData = `
         <a id="back-to-collection" href="#" 
@@ -73,7 +84,6 @@ function getZomatoCollectionData(entityID, collectionId, collectionName){
         lon: global_lon,
         collection_id: collectionId
     };
-
     global_collectionId = collectionId;
 
     const queryString = formatQueryParams(params);

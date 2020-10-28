@@ -15,13 +15,14 @@
             <h1>Discover what the city has to offer</h1>
 
             <form id="js-form">
+                <label for="js-search-term">Enter desired location</label>
                 <input type="text" name="search-term" id="js-search-term" placeholder="Enter a City, State" required>
                 <input type="submit" value="Go!">
             </form>
         </div>  
         <div class="centered">
             <p id="js-error-message" class="error-message"></p>
-            <section id="results" class="hidden">
+            <section id="results" class="hidden" aria-live="polite">
                 <h2><span id="search-term"></span></h2>
                 <div class="cards" id="results-out">
                 </div>
